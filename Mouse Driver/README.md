@@ -1,20 +1,7 @@
----
-page_type: sample
-description: "A WDF example of a mouse input filter driver."
-languages:
-- cpp
-products:
-- windows
-- windows-wdk
----
+# Calm Hands Mouse Driver
 
-# Mouse Input WDF Filter Driver (Moufiltr)
-
-The Moufiltr sample is an example of a mouse input filter driver.
-
-This sample is WDF version of the original WDM filter driver sample. The WDM version of this sample has been deprecated.
-
-This driver filters input for a particular mouse on the system. In its current state, it only hooks into the mouse packet report chain and the mouse ISR, and does not do any processing of the data that it sees. (The hooking of the ISR is only available in the i8042prt stack.) With additions to this current filter-only code base, the filter could conceivably add, remove, or modify input as needed.
+Overview:
+The driver is used to reduce unwanted mouse movement from tremors. Base filter is taken from the offical Windows filter driver sample. The driver uses two FIR filters (For x and y axis) on incoming mouse movement for stabilization. The driver assumes that the tremor is a specific frequency and smoothen it.
 
 ## Universal Windows Driver Compliant
 
@@ -22,8 +9,4 @@ This sample builds a Universal Windows Driver. It uses only APIs and DDIs that a
 
 ## Installation
 
-This sample is installed via an .inf file. The .inf file included in this sample is designed to filter a PS/2 mouse.
-
-The .inf file must install the class driver (Mouclass) and the port driver (i8042prt, Mouhid, Sermouse, etc.) by using Msmouse.inf and the INF directives "Needs" and "Include".
-
-The .inf file must add the correct registry values for the class and port driver, as well as using the new directives.
+This sample is installed via an .inf file. The .inf file included in this sample is designed to filter a PS/2 mouse. Right-click on the .inf file and click install. If that doesn't work, navigate to Device Manager, mouse and other pointing device, and right-click your current mouse. Then click update driver, browse my computer for drivers, let me pick from a list of availble drivers on my computer, and navigate to the .inf file.
