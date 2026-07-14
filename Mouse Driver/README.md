@@ -1,7 +1,11 @@
 # Calm Hands Mouse Driver
 
-Overview:
+
+## Overview
 The driver is used to reduce unwanted mouse movement from tremors. Base filter is taken from the offical Windows filter driver sample. The driver uses two FIR filters (For x and y axis) on incoming mouse movement for stabilization. The driver assumes that the tremor is a specific frequency and smoothen it.
+
+## WPF app communication
+The driver uses a Control Device Object (CDO) to recieve and send data to the WPF app. For security, the driver requires the app to have adminstrator permissions.
 
 ## Universal Windows Driver Compliant
 
